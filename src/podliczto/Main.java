@@ -14,22 +14,18 @@ import java.sql.Statement;
 public class Main {
     public static void main(String[] args) throws SQLException {
         
-        String url = "jdbc:mysql://localhost:3306/test";
-        String username = "root";
-        String password = "apteka14";
-        String password1 = "apteka14";
-        String name = "";
+        String queryURL = "SELECT * FROM osoba";
         
-        Connection connection = (Connection) DriverManager.getConnection(url, username, password);
-        System.out.println("Database connected!");
+        DBConnection connection = new DBConnection();
+        ResultSet result = connection.getData(connection.startConnection(), queryURL);
+ 
+        while (result.next()) {
+                int id = result.getInt("id");
+                String name = result.getString("imie");
+                System.out.println(id+ " " + name);
+            }
         
-        Statement st = connection.createStatement();
-        ResultSet rs = st.executeQuery("SELECT * FROM osoba");
         
-        if(rs.next()) {  
-            name = rs.getString("imie");
-        }
-        System.out.println(name);
     
     }
 }
