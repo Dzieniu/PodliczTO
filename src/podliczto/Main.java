@@ -13,19 +13,9 @@ import java.sql.Statement;
  */
 public class Main {
     public static void main(String[] args) throws SQLException {
+
+        DBData data = new DBData();
+        data.selectAll();
         
-        String queryURL = "SELECT * FROM osoba";
-        
-        DBConnection connection = new DBConnection();
-        ResultSet result = connection.getData(connection.startConnection(), queryURL);
- 
-        while (result.next()) {
-                int id = result.getInt("id");
-                String name = result.getString("imie");
-                System.out.println(id+ " " + name);
-            }
-        
-        
-    
     }
 }
