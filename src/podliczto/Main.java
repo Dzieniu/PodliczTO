@@ -12,10 +12,10 @@ import java.sql.Statement;
  * @author Konrad
  */
 public class Main {
-    public static void main(String[] args) throws SQLException {
-
-        DBData data = new DBData();
-        data.selectAll();
-        
-    }
+//    public static void main(String[] args) throws SQLException {
+//
+//        DBData data = new DBData();
+//        data.selectAll();
+//        
+//    }
 }
