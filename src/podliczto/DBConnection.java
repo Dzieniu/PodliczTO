@@ -13,7 +13,7 @@ import java.sql.Statement;
  */
 public class DBConnection {
     
-        private final String url = "jdbc:mysql://localhost:3306/podliczto";
+        private final String url = "jdbc:mysql://localhost:3306/podliczto?autoReconnect=true&useSSL=false";
         private final String username = "root";
         private final String password = "apteka13";
         Statement statement;
