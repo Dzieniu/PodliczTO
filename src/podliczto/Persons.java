@@ -13,7 +13,7 @@ import java.sql.SQLException;
  */
 public class Persons extends DBData {
     
-    String persons[] = new String[getRowCount()];
+    String persons[] = new String[getRowCount()+1];
     
     public Persons(String queryURL) throws SQLException {
         super(queryURL);
@@ -23,7 +23,7 @@ public class Persons extends DBData {
         int i=0;
         while(result.next()){
             
-            persons[i]=result.getString("Nickname");
+            persons[i+1]=result.getString("Nickname");
             i++;
         }
         return persons;

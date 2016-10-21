@@ -20,13 +20,16 @@ public class AllReceiptFrame extends javax.swing.JFrame {
     
     public String receipts = "SELECT r.forWhat, r.value, p.Nickname FROM Receipt r, Person p WHERE r.personID = p.idPerson";
     
-    DBData allReceipt = new DBData(receipts);
+    DBData allReceipt;
     Persons persons = new Persons("SELECT Nickname FROM Person");
     String[] columnNames;
     
     public AllReceiptFrame() throws SQLException {
+        
         initComponents();
-        setDataInTable();
+        setLocationRelativeTo(null);
+        setDataInTable(receipts);
+        selectPersonComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(persons.getPersons()));
     }
 
     public static void main(String args[]) {
@@ -43,11 +46,13 @@ public class AllReceiptFrame extends javax.swing.JFrame {
         });
     }
     
-    public void setDataInTable() throws SQLException{
+    public void setDataInTable(String url) throws SQLException{
+        allReceipt= new DBData(url);
         columnNames = allReceipt.getColumnNames();
         Object[][] data = allReceipt.getTableData();
         jTable1.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
-        selectPersonComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(persons.getPersons()));
+        
+        allReceipt = null;
         
     }
     
@@ -121,10 +126,24 @@ public class AllReceiptFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void selectPersonComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectPersonComboBoxActionPerformed
-        JComboBox selectPersonComboBox = (JComboBox) evt.getSource();
+        String urls;
+        try {
+        
         Object selected = selectPersonComboBox.getSelectedItem();
-        allReceipt.queryURL = "SELECT r.forWhat, r.value, p.Nickname FROM Receipt r, Person p WHERE r.personID = p.idPerson AND p.nickname =\""+selected.toString()+"\"";
-        //jLabel1.setText(allReceipt.queryURL);
+        allReceipt = new DBData();
+        if(selected==null){
+            urls= "SELECT r.forWhat, r.value, p.Nickname FROM Receipt r, Person p WHERE r.personID = p.idPerson";
+        }
+        else{
+            urls = "SELECT r.forWhat, r.value, p.Nickname FROM Receipt r, Person p WHERE r.personID = p.idPerson AND p.nickname =\""+selected.toString()+"\"";
+        }
+        
+        
+            setDataInTable(urls);
+        } catch (SQLException ex) {
+            Logger.getLogger(AllReceiptFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
     }//GEN-LAST:event_selectPersonComboBoxActionPerformed
 

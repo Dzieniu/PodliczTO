@@ -16,6 +16,8 @@ public class DBData {
     ResultSetMetaData rsmd;
     int rowCount=0;
     
+    public DBData(){
+    }
 
     public DBData(String queryURL) throws SQLException {  
         this.queryURL = queryURL;
