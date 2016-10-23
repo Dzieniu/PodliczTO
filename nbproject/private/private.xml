@@ -13,9 +13,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Konrad/Documents/NetBeansProjects/PodliczTO/src/podliczto/Main.java</file>
+            <file>file:/C:/Users/Konrad/Documents/NetBeansProjects/PodliczTO/src/podliczto/Persons.java</file>
             <file>file:/C:/Users/Konrad/Documents/NetBeansProjects/PodliczTO/src/podliczto/DBConnection.java</file>
             <file>file:/C:/Users/Konrad/Documents/NetBeansProjects/PodliczTO/src/podliczto/DBData.java</file>
             <file>file:/C:/Users/Konrad/Documents/NetBeansProjects/PodliczTO/src/podliczto/AllReceiptFrame.java</file>
+            <file>file:/C:/Users/Konrad/Documents/NetBeansProjects/PodliczTO/src/podliczto/AddNewReceipt.java</file>
+            <file>file:/C:/Users/Konrad/Documents/NetBeansProjects/PodliczTO/src/podliczto/newReceipt.java</file>
         </group>
     </open-files>
 </project-private>
