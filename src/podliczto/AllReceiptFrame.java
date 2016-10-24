@@ -19,7 +19,6 @@ import javax.swing.JComboBox;
 public class AllReceiptFrame extends javax.swing.JFrame {
 
     
-    public String receipts = "SELECT r.forWhat , r.value, p.Nickname FROM Receipt r, Person p WHERE r.personID = p.idPerson";
     
     DBData allReceipt;
     Persons persons = new Persons("SELECT Nickname FROM Person");
@@ -27,6 +26,9 @@ public class AllReceiptFrame extends javax.swing.JFrame {
     AddNewReceipt newReceiptFrame;
     Time time = new Time();
     CalculateData cdata = new CalculateData();
+    
+    public String receipts = "SELECT r.forWhat , r.value, p.Nickname,r.date  FROM Receipt r, Person p WHERE r.personID = p.idPerson AND r.date between" +"\'"+time.firstDayOfCurrentWeek+"\'" +" AND "+"\'"+ time.lastDayOfCurrentWeek+"\'";
+
     
     public AllReceiptFrame() throws SQLException {
         
@@ -74,11 +76,11 @@ public class AllReceiptFrame extends javax.swing.JFrame {
         int b = values[1]/2;
         if(a>b){
             int c = a-b;
-            sumary = "Osoba " + persons.getPersons()[1] +" wisi osobie " +persons.getPersons()[0] + " kwote " + c + " zł";
+            sumary = "Osoba " + persons.getPersons()[1] +" wisi osobie " +persons.getPersons()[2] + " kwote " + c + " zł";
         }
         else if (b>a){
             int c = b-a;
-            sumary = "Osoba " + persons.getPersons()[0] +" wisi osobie " +persons.getPersons()[1] + " kwote " + c + " zł";
+            sumary = "Osoba " + persons.getPersons()[2] +" wisi osobie " +persons.getPersons()[1] + " kwote " + c + " zł";
         }
         return sumary;
     
@@ -234,10 +236,10 @@ public class AllReceiptFrame extends javax.swing.JFrame {
         Object selected = selectPersonComboBox.getSelectedItem();
         allReceipt = new DBData();
         if(selected==null){
-            urls= "SELECT r.forWhat, r.value, p.Nickname FROM Receipt r, Person p WHERE r.personID = p.idPerson";
+            urls= "SELECT r.forWhat , r.value, p.Nickname,r.date  FROM Receipt r, Person p WHERE r.personID = p.idPerson AND r.date between" +"\'"+time.firstDayOfCurrentWeek+"\'" +" AND "+"\'"+ time.lastDayOfCurrentWeek+"\'";
         }
         else{
-            urls = "SELECT r.forWhat, r.value, p.Nickname FROM Receipt r, Person p WHERE r.personID = p.idPerson AND p.nickname =\""+selected.toString()+"\"";
+            urls = "SELECT r.forWhat, r.value, p.Nickname,r.date  FROM Receipt r, Person p WHERE r.personID = p.idPerson AND p.nickname =\""+selected.toString()+"\" "+"AND r.date between" +"\'"+time.firstDayOfCurrentWeek+"\'" +" AND "+"\'"+ time.lastDayOfCurrentWeek+"\'";
         }
         
         

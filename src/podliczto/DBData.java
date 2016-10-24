@@ -59,7 +59,7 @@ public class DBData {
     
     public int getPersonCount() throws SQLException{
         while (result.next()){
-           count = result.getInt("value");
+           count = result.getInt("summary");
         }
         return count;
     }

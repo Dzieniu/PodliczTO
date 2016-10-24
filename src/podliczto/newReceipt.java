@@ -27,10 +27,10 @@ public class newReceipt extends Persons{
         return persons;
     }
     
-    public void putNewReceipt(String forWhat, int howMany, int personID) throws SQLException{
+    public void putNewReceipt(String forWhat, int howMany, int personID, String date) throws SQLException{
         datas = new DBData("SELECT * FROM receipt");
         int rows = datas.getRowCount();
-        String sends="INSERT INTO receipt VALUES ("+ (rows+1)+","+"\""+forWhat+"\""+","+howMany+","+personID+")";
+        String sends="INSERT INTO receipt VALUES ("+ (rows+1)+","+"\""+forWhat+"\""+","+howMany+","+personID+","+ "STR_TO_DATE("+"\""+date+"\""+","+"'%Y-%m-%d')"+")";
         send.startConnection().executeUpdate(sends);
         datas= null;
     }

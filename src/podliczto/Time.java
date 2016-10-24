@@ -14,7 +14,7 @@ import java.util.GregorianCalendar;
  */
 public class Time {
     
-    DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy ");
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Date currentDate = new Date();
     Calendar myDate = Calendar.getInstance();
     
@@ -30,6 +30,7 @@ public class Time {
     public Time() {
         if (myDate.get(Calendar.DAY_OF_WEEK)==1){
             this.dayOfweek =7;
+            calculateEdgeDays();
         }
         else{
             this.dayOfweek = myDate.get(Calendar.DAY_OF_WEEK)-1;
