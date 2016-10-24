@@ -16,23 +16,30 @@ public class Time {
     
     DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy ");
     Date currentDate = new Date();
+    Calendar myDate = Calendar.getInstance();
     
     private final String dayInWeek[] = {"Poniedziałek","Wtorek","Środa","Czwartek","Piątek","Sobota","Niedziela"};
     private String currentDay;
     
     public String firstDayOfCurrentWeek;
     public String lastDayOfCurrentWeek;
-    private final int dayOfweek;
+    public int dayOfweek;
     long addingDays,subtractsDays;
 
     
     public Time() {
-        this.dayOfweek = Calendar.DAY_OF_WEEK;
+        if (myDate.get(Calendar.DAY_OF_WEEK)==1){
+            this.dayOfweek =7;
+        }
+        else{
+            this.dayOfweek = myDate.get(Calendar.DAY_OF_WEEK)-1;
+        }
         calculateEdgeDays();
-    }
+    
+        }
     
     public String getToday(){
-        currentDay = dayInWeek[dayOfweek-1]+ " ( " + dateFormat.format(currentDate)+")";
+        currentDay = dayInWeek[0]+ " ( " + dateFormat.format(currentDate)+")";
         return currentDay;
     }
     

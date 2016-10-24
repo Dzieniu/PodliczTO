@@ -6,6 +6,7 @@
 package podliczto;
 
 import com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,16 +26,21 @@ public class AllReceiptFrame extends javax.swing.JFrame {
     String[] columnNames;
     AddNewReceipt newReceiptFrame;
     Time time = new Time();
+    CalculateData cdata = new CalculateData();
     
     public AllReceiptFrame() throws SQLException {
         
         initComponents();
         setLocationRelativeTo(null);
         todayDate.setText(time.getToday());
+        if(time.dayOfweek==7){
+            todayDate.setForeground(Color.red);
+        }
         dateFrom.setText(time.firstDayOfCurrentWeek);
         dateTo.setText(time.lastDayOfCurrentWeek);
         setDataInTable(receipts);
         selectPersonComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(persons.getPersons()));
+        sumary.setText(calculate());
     }
 
     public static void main(String args[]) {
@@ -61,10 +67,23 @@ public class AllReceiptFrame extends javax.swing.JFrame {
         
     }
     
+    public String calculate() throws SQLException{
+        String sumary = "";
+        int values[] = cdata.sumaryPersonValues(persons.getPersons());
+        int a = values[0]/2;
+        int b = values[1]/2;
+        if(a>b){
+            int c = a-b;
+            sumary = "Osoba " + persons.getPersons()[1] +" wisi osobie " +persons.getPersons()[0] + " kwote " + c + " zł";
+        }
+        else if (b>a){
+            int c = b-a;
+            sumary = "Osoba " + persons.getPersons()[0] +" wisi osobie " +persons.getPersons()[1] + " kwote " + c + " zł";
+        }
+        return sumary;
     
-
-    
-    
+    }
+     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -80,6 +99,7 @@ public class AllReceiptFrame extends javax.swing.JFrame {
         dateFrom = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         dateTo = new javax.swing.JLabel();
+        sumary = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 255));
@@ -137,6 +157,8 @@ public class AllReceiptFrame extends javax.swing.JFrame {
 
         dateTo.setText("jLabel7");
 
+        sumary.setText("jLabel5");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -144,6 +166,7 @@ public class AllReceiptFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sumary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(selectPersonComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,30 +195,33 @@ public class AllReceiptFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(selectPersonComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(129, 129, 129)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(todayDate))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dateFrom)
-                    .addComponent(jLabel6)
-                    .addComponent(dateTo))
-                .addContainerGap(69, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(selectPersonComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGap(129, 129, 129)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(todayDate))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(dateFrom)
+                            .addComponent(jLabel6)
+                            .addComponent(dateTo)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(sumary)
+                .addContainerGap())
         );
 
         pack();
@@ -258,6 +284,7 @@ public class AllReceiptFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JComboBox<String> selectPersonComboBox;
+    private javax.swing.JLabel sumary;
     private javax.swing.JLabel todayDate;
     // End of variables declaration//GEN-END:variables
 }

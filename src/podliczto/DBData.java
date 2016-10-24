@@ -15,6 +15,7 @@ public class DBData {
     ResultSet result;
     ResultSetMetaData rsmd;
     int rowCount=0;
+    int count;
     
     public DBData(){
     }
@@ -54,6 +55,13 @@ public class DBData {
         rowCount = result.getRow();
         result.beforeFirst();
         return rowCount;
+    }
+    
+    public int getPersonCount() throws SQLException{
+        while (result.next()){
+           count = result.getInt("value");
+        }
+        return count;
     }
     
 }
