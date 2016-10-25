@@ -40,7 +40,7 @@ public class Time {
         }
     
     public String getToday(){
-        currentDay = dayInWeek[0]+ " ( " + dateFormat.format(currentDate)+")";
+        currentDay = dayInWeek[dayOfweek-1]+ " ( " + dateFormat.format(currentDate)+")";
         return currentDay;
     }
     

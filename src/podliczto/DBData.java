@@ -15,7 +15,7 @@ public class DBData {
     ResultSet result;
     ResultSetMetaData rsmd;
     int rowCount=0;
-    int count;
+    int count=0;
     
     public DBData(){
     }

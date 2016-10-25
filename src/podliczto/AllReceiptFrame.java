@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package podliczto;
-
-import com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -72,14 +70,16 @@ public class AllReceiptFrame extends javax.swing.JFrame {
     public String calculate() throws SQLException{
         String sumary = "";
         int values[] = cdata.sumaryPersonValues(persons.getPersons());
-        int a = values[0]/2;
-        int b = values[1]/2;
+        double a = (double)values[2]/2;
+        double b = (double)values[1]/2;
+        double c = 0.00;
+        System.out.println(a);
         if(a>b){
-            int c = a-b;
+            c = a-b;
             sumary = "Osoba " + persons.getPersons()[1] +" wisi osobie " +persons.getPersons()[2] + " kwote " + c + " zł";
         }
         else if (b>a){
-            int c = b-a;
+            c = b-a;
             sumary = "Osoba " + persons.getPersons()[2] +" wisi osobie " +persons.getPersons()[1] + " kwote " + c + " zł";
         }
         return sumary;
@@ -262,7 +262,11 @@ public class AllReceiptFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
-    
+        try {
+            sumary.setText(calculate());
+        } catch (SQLException ex) {
+            Logger.getLogger(AllReceiptFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jTable1MouseEntered
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
