@@ -18,7 +18,7 @@ public class Time {
     Date currentDate = new Date();
     Calendar myDate = Calendar.getInstance();
     
-    private final String dayInWeek[] = {"Poniedziałek","Wtorek","Środa","Czwartek","Piątek","Sobota","Niedziela"};
+    public final String dayInWeek[] = {"Poniedziałek","Wtorek","Środa","Czwartek","Piątek","Sobota","Niedziela"};
     private String currentDay;
     
     public String firstDayOfCurrentWeek;
