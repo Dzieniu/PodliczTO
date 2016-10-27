@@ -24,6 +24,7 @@ public class menuFrame extends javax.swing.JFrame {
     public menuFrame() throws IOException {
         initComponents();
         jTable1.setModel(new javax.swing.table.DefaultTableModel(mealTab,menu.getDays()));
+        menu.loadMenu(jTable1);
         shoppinglist.loadShoppingList(jTextArea1);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);

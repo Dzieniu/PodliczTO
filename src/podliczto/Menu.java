@@ -1,9 +1,13 @@
 package podliczto;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -47,8 +51,19 @@ public class Menu {
                 os.print(jtable.getValueAt(row, col)+" ");
             }
         os.println("");
-}
+        }
         os.close();
     
     }
+    public void loadMenu(JTable jtable) throws FileNotFoundException, IOException{
+        DefaultTableModel mod = (DefaultTableModel) jtable.getModel();
+        BufferedReader bfw = new BufferedReader(new FileReader("menu.txt"));
+        for (int i = 0 ; i < jtable.getRowCount(); i++){
+                mod.addRow( bfw.readLine().split(" ") );
+        }
+        bfw.close();
+        
+        
+    }
+    
 }
