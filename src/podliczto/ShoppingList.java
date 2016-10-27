@@ -23,6 +23,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 /**
@@ -59,7 +60,7 @@ public class ShoppingList {
         String from = "dzieniu@gmail.com";
         String toAddress = "dzieniu@gmail.com";
         String filename = "shoppingList.txt";
-        // Get system properties
+        
         Properties props = System.getProperties();
         props.put("mail.smtp.host", host);
         props.put("mail.smtps.auth", "true");
@@ -98,7 +99,6 @@ public class ShoppingList {
             Transport tr = session.getTransport("smtps");
             tr.connect(host, from, Password);
             tr.sendMessage(message, message.getAllRecipients());
-            System.out.println("Mail Sent Successfully");
             tr.close();
 
         } catch (SendFailedException sfe) {

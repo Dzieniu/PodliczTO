@@ -158,7 +158,11 @@ public class menuFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        menu.saveMenu(jTable1);
+        try {
+            menu.saveMenuToFile(jTable1);
+        } catch (IOException ex) {
+            Logger.getLogger(menuFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
