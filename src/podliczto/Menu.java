@@ -48,22 +48,50 @@ public class Menu {
         
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < column; col++) {
-                os.print(jtable.getValueAt(row, col)+" ");
+                os.println(jtable.getValueAt(row, col));
             }
-        os.println("");
         }
         os.close();
     
     }
     public void loadMenu(JTable jtable) throws FileNotFoundException, IOException{
-        DefaultTableModel mod = (DefaultTableModel) jtable.getModel();
-        BufferedReader bfw = new BufferedReader(new FileReader("menu.txt"));
-        for (int i = 0 ; i < jtable.getRowCount(); i++){
-                mod.addRow( bfw.readLine().split(" ") );
+         BufferedReader br = new BufferedReader(new FileReader("menu.txt"));
+         int column = jtable.getModel().getColumnCount();
+            int rows = jtable.getModel().getRowCount();
+         String line = null;
+         String list[] = new String[column*rows];
+         int incr = 0;
+         while ((line = br.readLine()) != null) {
+             list[incr]=line;
+             incr++;
+         }
+         incr = 0;
+         for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < column; col++) {
+                if(list[incr].equals("null")){
+                jtable.setValueAt(null,row, col);
+                }
+                else{
+                jtable.setValueAt(list[incr],row, col);
+                }
+                    
+            incr++;
+            }
+            
         }
-        bfw.close();
+         
         
-        
+    }
+
+    void cleanList(JTable jtable) {
+       int column = jtable.getModel().getColumnCount();
+       int rows = jtable.getModel().getRowCount();
+       for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < column; col++) {
+                jtable.setValueAt(null,row, col);
+            }
+            
+        }
     }
     
 }

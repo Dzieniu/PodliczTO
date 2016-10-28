@@ -108,6 +108,7 @@ public class AllReceiptFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 255));
+        setForeground(java.awt.Color.white);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
